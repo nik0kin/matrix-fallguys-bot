@@ -1,0 +1,22 @@
+{
+  /**
+    ----- Linting configurations
+  */
+  // Prevent editor formatting on save for certain file types
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false,
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false,
+  },
+  // Configure eslint to report + fix errors for correct file types
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ]
+}

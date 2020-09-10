@@ -1,0 +1,25 @@
+matrix-fallguys-bot
+
+
+settings:
+  pollFrequency: 60
+
+
+function poll() {
+  await checkForNewFeaturedStoreItems();
+  setTimeout(() => {
+    poll();
+  }, pollFrequency);
+}
+
+function checkForNewFeaturedStoreItems() {
+  const data = await checkDatabase();
+  if (newData) {
+    // notify watchers
+  }
+}
+
+Fall Guys Featured Store:
+ - Rare Costume Top: Hatchling - 4500K
+ - Rare Costume Bottom: Hatchling - 4500K
+ - Legendary Pattern: Mountains - 3C
