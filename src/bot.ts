@@ -27,9 +27,11 @@ async function checkForNewFeaturedStoreItems(settings: Settings, botClient: Matr
   if (!data || JSON.stringify(data.shopFeaturedItems) !== JSON.stringify(lastFeaturedShopItems)) {
     // notify watchers
     console.log('New data! Sending messages to rooms.');
-    const shopItemMessage = 'Shop Featured Items:\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings)}`).join('\n');
+    const shopFeaturedItemsTitle = 'Shop Featured Items:';
+    const shopItemMessage = shopFeaturedItemsTitle + '\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings, false)}`).join('\n');
+    const shopItemMessageHtmlFormatted = shopFeaturedItemsTitle + '<br>' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings, true)}`).join('<br>');
     console.log(shopItemMessage);
-    sendMessageToAllJoinedRooms(botClient, shopItemMessage);
+    sendMessageToAllJoinedRooms(botClient, shopItemMessage, shopItemMessageHtmlFormatted);
 
     lastFeaturedShopItems = data.shopFeaturedItems;
   }
@@ -54,11 +56,18 @@ export function startPoll(settings: Settings) {
     });
 }
 
-function sendMessageToAllJoinedRooms(client: MatrixClient, message: string) {
+function sendMessageToAllJoinedRooms(client: MatrixClient, message: string, htmlFormattedMessage?: string) {
   client.getJoinedRooms()
     .then((rooms) => {
       rooms.forEach((roomId) => {
-        client.sendText(roomId, message);
+        client.sendMessage(roomId, {
+          msgtype: 'm.text',
+          body: message,
+          ...(htmlFormattedMessage ? {
+            format: 'org.matrix.custom.html',
+            formatted_body: htmlFormattedMessage
+          } : {})
+        });
       });
     });
 }

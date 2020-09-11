@@ -31,7 +31,7 @@ function getCurrencyEmoji(currency: ShopItem['currency']) {
 }
 
 // "Rare Costume Top: Hatchling - 4500K"
-export function getShopItemString(item: ShopItem, settings: Settings) {
+export function getShopItemString(item: ShopItem, settings: Settings, htmlFormatted: boolean) {
   const rarityEmoji = settings.emoji ? getRarityEmoji(item.rarity) : '';
   const typeEmoji = settings.emoji ? getTypeEmoji(item.type) : '';
   const currencyEmoji = settings.emoji ? getCurrencyEmoji(item.currency) : '';
@@ -43,7 +43,9 @@ export function getShopItemString(item: ShopItem, settings: Settings) {
   const type = isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type);
 
   const itemLink = getFallguysGamepediaItemUrl(item);
-  const name = settings.gamepediaLink ? `<a href="${itemLink}">${item.name}</a>` : item.name;
+  const name = settings.gamepediaLink
+    ? !htmlFormatted ? `[${item.name}](${itemLink})` : `<a href="${itemLink}">${item.name}</a>`
+    : item.name;
 
   const cost = `${item.cost}${currencyEmoji || (item.currency === 'kudos' ? 'K' : 'C')}`;
 
