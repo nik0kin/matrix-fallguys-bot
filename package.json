@@ -16,7 +16,8 @@
     "// ------ LINTING ----- //": "",
     "lint": "eslint . --ext .ts",
     "// ------ PRODUCTION ----- //": "",
-    "start": "nodemon src/index.ts"
+    "start": "nodemon -I src/index.ts",
+    "stop": "nodemon --signal SIGHUP src/index.ts"
   },
   "keywords": [],
   "author": "",
