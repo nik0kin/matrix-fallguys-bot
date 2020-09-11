@@ -23,7 +23,7 @@ describe('getShopItemString', () => {
     expect(getShopItemString(patternShopItem, {} as any)).toEqual('Legendary Pattern: Mountains - 3C');
   });
   // test('should work with emojis', () => {
-  //   expect(getShopItemString(testCostumeShopItem, { emoji: true } as any)).toEqual('🟪Rare 🩳Costume Bottom: Hatchling - 4500🇰');
-  //   expect(getShopItemString(patternShopItem, { emoji: true } as any)).toEqual('🟧Legendary 💠Pattern: Mountains - 3👑');
+  //   expect(getShopItemString(testCostumeShopItem, { emoji: true } as any)).toEqual('Rare Costume Bottom🟪🩳: Hatchling - 4500🇰');
+  //   expect(getShopItemString(patternShopItem, { emoji: true } as any)).toEqual('Legendary Pattern🟧💠: Mountains - 3👑');
   // });
 });

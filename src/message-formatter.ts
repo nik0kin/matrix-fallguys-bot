@@ -34,13 +34,13 @@ export function getShopItemString(item: ShopItem, settings: Settings) {
   const typeEmoji = settings.emoji ? getTypeEmoji(item.type) : '';
   const currencyEmoji = settings.emoji ? getCurrencyEmoji(item.currency) : '';
 
-  const rarity = rarityEmoji + capitalizeFirstLetter(item.rarity);
+  const rarity = capitalizeFirstLetter(item.rarity);
   const isCostume = item.type === 'upper' || item.type === 'lower';
   const topOrBottom = isCostume ? ' ' + item.type === 'upper' ? 'Top' : 'Bottom' : '';
-  const type = typeEmoji + (isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type));
+  const type = isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type);
   const cost = `${item.cost}${currencyEmoji || (item.currency === 'kudos' ? 'K' : 'C')}`;
 
-  return `${rarity} ${type}: ${item.name} - ${cost}`;
+  return `${rarity} ${type}${rarityEmoji + typeEmoji}: ${item.name} - ${cost}`;
 }
 
 function capitalizeFirstLetter(str: string) {
