@@ -24,14 +24,13 @@ async function checkForNewFeaturedStoreItems(botClient: MatrixClient) {
   const data = await checkDatabase();
 
   // if new data
-  if (JSON.stringify(data) !== JSON.stringify(lastFeaturedShopItems)) {
+  if (!data || JSON.stringify(data.shopFeaturedItems) !== JSON.stringify(lastFeaturedShopItems)) {
     // notify watchers
     console.log('new data!');
-    data.shopFeaturedItems.forEach((i) => {
-      const shopItemMessage = ` - ${getShopItemString(i)}`;
-      console.log(shopItemMessage);
-      sendMessageToAllJoinedRooms(botClient, shopItemMessage);
-    });
+    const shopItemMessage = data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i)}`).join('\n');
+    console.log(shopItemMessage);
+    sendMessageToAllJoinedRooms(botClient, shopItemMessage);
+
     lastFeaturedShopItems = data.shopFeaturedItems;
   }
 }
