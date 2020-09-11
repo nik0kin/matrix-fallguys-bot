@@ -11,7 +11,7 @@ let lastFeaturedShopItems: [ShopItem, ShopItem, ShopItem];
 
 async function poll(settings: Settings, botClient: MatrixClient) {
   try {
-    await checkForNewFeaturedStoreItems(botClient);
+    await checkForNewFeaturedStoreItems(settings, botClient);
   } catch(e) {
     console.error('Something went wrong polling', e);
   }
@@ -20,14 +20,14 @@ async function poll(settings: Settings, botClient: MatrixClient) {
   }, settings.pollFrequency * 1000);
 }
 
-async function checkForNewFeaturedStoreItems(botClient: MatrixClient) {
+async function checkForNewFeaturedStoreItems(settings: Settings, botClient: MatrixClient) {
   const data = await checkDatabase();
 
   // if new data
   if (!data || JSON.stringify(data.shopFeaturedItems) !== JSON.stringify(lastFeaturedShopItems)) {
     // notify watchers
     console.log('new data!');
-    const shopItemMessage = 'Shop Featured Items:\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i)}`).join('\n');
+    const shopItemMessage = 'Shop Featured Items:\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings)}`).join('\n');
     console.log(shopItemMessage);
     sendMessageToAllJoinedRooms(botClient, shopItemMessage);
 

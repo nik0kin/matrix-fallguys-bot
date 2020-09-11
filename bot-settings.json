@@ -1,5 +1,6 @@
 {
   "homeserverUrl": "https://localhost",
   "accessToken": "YourSecretAccessToken",
-  "pollFrequency": 60
+  "pollFrequency": 60,
+  "emoji": true
 }
