@@ -3,5 +3,6 @@
   "accessToken": "YourSecretAccessToken",
   "pollFrequency": 60,
   "emoji": true,
+  "gamepediaLink": true,
   "onBotJoinRoomMessage": "Hello, Let's Fall!"
 }

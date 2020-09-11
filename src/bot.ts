@@ -41,14 +41,16 @@ export function startPoll(settings: Settings) {
 
   botClient.start()
     .then(() => {
-      console.log(settings.onBotJoinRoomMessage);
+      console.log(settings.onBotJoinRoomMessage || 'onBotJoinRoomMessage');
 
-      sendMessageToAllJoinedRooms(botClient, settings.onBotJoinRoomMessage);
+      if (settings.onBotJoinRoomMessage) {
+        sendMessageToAllJoinedRooms(botClient, settings.onBotJoinRoomMessage);
+
+        botClient.on('room.join', (roomId: string) => {
+          botClient.sendText(roomId, settings.onBotJoinRoomMessage);
+        });
+      }
       poll(settings, botClient);
-
-      botClient.on('room.join', (roomId: string) => {
-        botClient.sendText(roomId, settings.onBotJoinRoomMessage);
-      });
     });
 }
 

@@ -1,5 +1,7 @@
 import { ShopItem } from './fall-guys';
 import { Settings } from './settings';
+import { capitalizeFirstLetter } from './string-util';
+import { getFallguysGamepediaItemUrl } from './fall-guys-gamepedia';
 
 function getRarityEmoji(rarity: ShopItem['rarity']) {
   return {
@@ -35,15 +37,17 @@ export function getShopItemString(item: ShopItem, settings: Settings) {
   const currencyEmoji = settings.emoji ? getCurrencyEmoji(item.currency) : '';
 
   const rarity = capitalizeFirstLetter(item.rarity);
+
   const isCostume = item.type === 'upper' || item.type === 'lower';
   const topOrBottom = isCostume ? ' ' + item.type === 'upper' ? 'Top' : 'Bottom' : '';
   const type = isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type);
+
+  const itemLink = getFallguysGamepediaItemUrl(item);
+  const name = settings.gamepediaLink ? `[${item.name}](${itemLink})` : item.name;
+
   const cost = `${item.cost}${currencyEmoji || (item.currency === 'kudos' ? 'K' : 'C')}`;
 
-  return `${rarity} ${type}${rarityEmoji + typeEmoji}: ${item.name} - ${cost}`;
+  return `${rarity} ${type}${rarityEmoji + typeEmoji}: ${name} - ${cost}`;
 }
 
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 
