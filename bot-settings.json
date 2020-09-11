@@ -2,5 +2,6 @@
   "homeserverUrl": "https://localhost",
   "accessToken": "YourSecretAccessToken",
   "pollFrequency": 60,
-  "emoji": true
+  "emoji": true,
+  "onBotJoinRoomMessage": "Hello, Let's Fall!"
 }

@@ -26,7 +26,7 @@ async function checkForNewFeaturedStoreItems(settings: Settings, botClient: Matr
   // if new data
   if (!data || JSON.stringify(data.shopFeaturedItems) !== JSON.stringify(lastFeaturedShopItems)) {
     // notify watchers
-    console.log('new data!');
+    console.log('New data! Sending messages to rooms.');
     const shopItemMessage = 'Shop Featured Items:\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings)}`).join('\n');
     console.log(shopItemMessage);
     sendMessageToAllJoinedRooms(botClient, shopItemMessage);
@@ -41,14 +41,13 @@ export function startPoll(settings: Settings) {
 
   botClient.start()
     .then(() => {
-      const startMessage = "Hello, Let's Fall!";
-      console.log(startMessage);
+      console.log(settings.onBotJoinRoomMessage);
 
-      sendMessageToAllJoinedRooms(botClient, startMessage);
+      sendMessageToAllJoinedRooms(botClient, settings.onBotJoinRoomMessage);
       poll(settings, botClient);
 
       botClient.on('room.join', (roomId: string) => {
-        botClient.sendText(roomId, startMessage);
+        botClient.sendText(roomId, settings.onBotJoinRoomMessage);
       });
     });
 }
