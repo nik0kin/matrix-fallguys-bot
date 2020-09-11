@@ -1,7 +1,8 @@
 import { ShopItem } from './fall-guys';
 import { Settings } from './settings';
 import { capitalizeFirstLetter } from './string-util';
-import { getFallguysGamepediaItemUrl } from './fall-guys-gamepedia';
+import { getFallguysDBItemUrl } from './fall-guys-db';
+import { DBItem } from './db-item';
 
 function getRarityEmoji(rarity: ShopItem['rarity']) {
   return {
@@ -31,7 +32,7 @@ function getCurrencyEmoji(currency: ShopItem['currency']) {
 }
 
 // "Rare Costume Top: Hatchling - 4500K"
-export function getShopItemString(item: ShopItem, settings: Settings, htmlFormatted: boolean) {
+export function getShopItemString(item: DBItem, settings: Settings, htmlFormatted: boolean) {
   const rarityEmoji = settings.emoji ? getRarityEmoji(item.rarity) : '';
   const typeEmoji = settings.emoji ? getTypeEmoji(item.type) : '';
   const currencyEmoji = settings.emoji ? getCurrencyEmoji(item.currency) : '';
@@ -42,7 +43,7 @@ export function getShopItemString(item: ShopItem, settings: Settings, htmlFormat
   const topOrBottom = isCostume ? ' ' + item.type === 'upper' ? 'Top' : 'Bottom' : '';
   const type = isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type);
 
-  const itemLink = getFallguysGamepediaItemUrl(item);
+  const itemLink = getFallguysDBItemUrl(item.link);
   const name = settings.gamepediaLink
     ? !htmlFormatted ? `[${item.name}](${itemLink})` : `<a href="${itemLink}">${item.name}</a>`
     : item.name;

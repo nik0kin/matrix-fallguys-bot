@@ -1,44 +1,49 @@
-import { ShopItem } from './fall-guys';
+import { DBItem } from './db-item';
 import { getShopItemString } from './message-formatter';
 
-const testCostumeShopItem: ShopItem = {
+const testCostumeShopItem: DBItem = {
   'name': 'Hatchling',
   'type': 'lower',
   'rarity': 'rare',
   'cost': 4500,
-  'currency': 'kudos'
+  'currency': 'kudos',
+  'link': '/lower-items/hatchling'
 };
 
-const patternShopItem: ShopItem = {
+const patternShopItem: DBItem = {
   'name': 'Mountains',
   'type': 'pattern',
   'rarity': 'legendary',
   'cost': 3,
-  'currency': 'crowns'
+  'currency': 'crowns',
+  'link': '/patterns/mountains'
 };
 
-const tartanPatternShopItem: ShopItem = {
+const tartanPatternShopItem: DBItem = {
   'name': 'Tartan',
   'type': 'pattern',
   'rarity': 'epic',
   'cost': 4500,
-  'currency': 'kudos'
+  'currency': 'kudos',
+  'link': '/patterns/tartan'
 };
 
-const faceShopItem: ShopItem = {
+const faceShopItem: DBItem = {
   'name': 'Raging',
   'type': 'face',
   'rarity': 'epic',
   'cost': 1,
-  'currency': 'crowns'
+  'currency': 'crowns',
+  'link': '/faces/raging'
 };
 
-const colourShopItem: ShopItem = {
+const colourShopItem: DBItem = {
   'name': 'Bumblebee',
   'type': 'colour',
   'rarity': 'legendary',
   'cost': 2,
-  'currency': 'crowns'
+  'currency': 'crowns',
+  'link': '/colors/bumblebee'
 };
 
 describe('getShopItemString', () => {
@@ -47,11 +52,16 @@ describe('getShopItemString', () => {
     expect(getShopItemString(patternShopItem, {} as any, false)).toEqual('Legendary Pattern: Mountains - 3C');
   });
   test('should work with links', () => {
-    expect(getShopItemString(testCostumeShopItem, { gamepediaLink: true } as any, false)).toEqual('Rare Costume Bottom: [Hatchling](https://fallguysultimateknockout.gamepedia.com/Hatchling_Costume) - 4500K');
-    expect(getShopItemString(patternShopItem, { gamepediaLink: true } as any, false)).toEqual('Legendary Pattern: [Mountains](https://fallguysultimateknockout.gamepedia.com/Patterns) - 3C');
-    expect(getShopItemString(tartanPatternShopItem, { gamepediaLink: true } as any, false)).toEqual('Epic Pattern: [Tartan](https://fallguysultimateknockout.gamepedia.com/Tartan_Pattern) - 4500K');
-    expect(getShopItemString(faceShopItem, { gamepediaLink: true } as any, false)).toEqual('Epic Face: [Raging](https://fallguysultimateknockout.gamepedia.com/Faceplates) - 1C');
-    expect(getShopItemString(colourShopItem, { gamepediaLink: true } as any, false)).toEqual('Legendary Colour: [Bumblebee](https://fallguysultimateknockout.gamepedia.com/Colour_Schemes) - 2C');
+    expect(getShopItemString(testCostumeShopItem, { gamepediaLink: true } as any, false))
+      .toEqual('Rare Costume Bottom: [Hatchling](https://fallguysdb.com/lower-items/hatchling) - 4500K');
+    expect(getShopItemString(patternShopItem, { gamepediaLink: true } as any, false))
+      .toEqual('Legendary Pattern: [Mountains](https://fallguysdb.com/patterns/mountains) - 3C');
+    expect(getShopItemString(tartanPatternShopItem, { gamepediaLink: true } as any, false))
+      .toEqual('Epic Pattern: [Tartan](https://fallguysdb.com/patterns/tartan) - 4500K');
+    expect(getShopItemString(faceShopItem, { gamepediaLink: true } as any, false))
+      .toEqual('Epic Face: [Raging](https://fallguysdb.com/faces/raging) - 1C');
+    expect(getShopItemString(colourShopItem, { gamepediaLink: true } as any, false))
+      .toEqual('Legendary Colour: [Bumblebee](https://fallguysdb.com/colors/bumblebee) - 2C');
   });
   // test('should work with emojis', () => {
   //   expect(getShopItemString(testCostumeShopItem, { emoji: true } as any)).toEqual('Rare Costume Bottom🟪🩳: Hatchling - 4500🇰');

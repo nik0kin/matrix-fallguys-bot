@@ -27,7 +27,8 @@ async function checkForNewFeaturedStoreItems(settings: Settings, botClient: Matr
   if (!data || JSON.stringify(data.shopFeaturedItems) !== JSON.stringify(lastFeaturedShopItems)) {
     // notify watchers
     console.log('New data! Sending messages to rooms.');
-    const shopFeaturedItemsTitle = 'Shop Featured Items:';
+    const cartEmoji = settings.emoji ? '🛒' : '';
+    const shopFeaturedItemsTitle = `${cartEmoji}Shop Featured Items${cartEmoji}:`;
     const shopItemMessage = shopFeaturedItemsTitle + '\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings, false)}`).join('\n');
     const shopItemMessageHtmlFormatted = shopFeaturedItemsTitle + '<br>' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings, true)}`).join('<br>');
     console.log(shopItemMessage);
