@@ -1,8 +1,7 @@
 export interface Item {
   name: string;
-  type: string;
-  rarity: string;
-  topOrBottom?: 'top' | 'bottom';
+  type: 'colour' | 'pattern' | 'face' | 'upper' | 'lower';
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 }
 
 export interface ShopItem extends Item {

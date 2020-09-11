@@ -27,7 +27,7 @@ async function checkForNewFeaturedStoreItems(botClient: MatrixClient) {
   if (!data || JSON.stringify(data.shopFeaturedItems) !== JSON.stringify(lastFeaturedShopItems)) {
     // notify watchers
     console.log('new data!');
-    const shopItemMessage = data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i)}`).join('\n');
+    const shopItemMessage = 'Shop Featured Items:\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i)}`).join('\n');
     console.log(shopItemMessage);
     sendMessageToAllJoinedRooms(botClient, shopItemMessage);
 
