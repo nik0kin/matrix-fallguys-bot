@@ -1,3 +1,5 @@
 {
+  "homeserverUrl": "https://localhost",
+  "accessToken": "YourSecretAccessToken",
   "pollFrequency": 60
 }

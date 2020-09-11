@@ -1,28 +1,26 @@
 /* eslint-disable no-console */
+import { MatrixClient } from 'matrix-bot-sdk';
 
 import { checkDatabase } from './db';
 import { ShopItem } from './fall-guys';
 import { getShopItemString } from './message-formatter';
-
-interface Settings {
-  pollFrequency: number; // In seconds
-}
+import { Settings } from './settings';
+import { createMatrixClient } from './matrix-bot';
 
 let lastFeaturedShopItems: [ShopItem, ShopItem, ShopItem];
 
-
-async function poll(settings: Settings) {
+async function poll(settings: Settings, botClient: MatrixClient) {
   try {
-    await checkForNewFeaturedStoreItems();
+    await checkForNewFeaturedStoreItems(botClient);
   } catch(e) {
     console.error('Something went wrong polling', e);
   }
   setTimeout(() => {
-    poll(settings);
+    poll(settings, botClient);
   }, settings.pollFrequency * 1000);
 }
 
-async function checkForNewFeaturedStoreItems() {
+async function checkForNewFeaturedStoreItems(botClient: MatrixClient) {
   const data = await checkDatabase();
 
   // if new data
@@ -30,7 +28,9 @@ async function checkForNewFeaturedStoreItems() {
     // notify watchers
     console.log('new data!');
     data.shopFeaturedItems.forEach((i) => {
-      console.log(` - ${getShopItemString(i)}`);
+      const shopItemMessage = ` - ${getShopItemString(i)}`;
+      console.log(shopItemMessage);
+      sendMessageToAllJoinedRooms(botClient, shopItemMessage);
     });
     lastFeaturedShopItems = data.shopFeaturedItems;
   }
@@ -38,8 +38,27 @@ async function checkForNewFeaturedStoreItems() {
 
 
 export function startPoll(settings: Settings) {
-  // TODO init bot
-  // TODO "Hello, Let's Fall"
-  console.log("Hello, Let's Fall");
-  poll(settings);
+  const botClient = createMatrixClient(settings);
+
+  botClient.start()
+    .then(() => {
+      const startMessage = "Hello, Let's Fall!";
+      console.log(startMessage);
+
+      sendMessageToAllJoinedRooms(botClient, startMessage);
+      poll(settings, botClient);
+
+      botClient.on('room.join', (roomId: string) => {
+        botClient.sendText(roomId, startMessage);
+      });
+    });
+}
+
+function sendMessageToAllJoinedRooms(client: MatrixClient, message: string) {
+  client.getJoinedRooms()
+    .then((rooms) => {
+      rooms.forEach((roomId) => {
+        client.sendText(roomId, message);
+      });
+    });
 }
