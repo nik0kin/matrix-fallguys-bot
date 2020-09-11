@@ -47,11 +47,11 @@ describe('getShopItemString', () => {
     expect(getShopItemString(patternShopItem, {} as any)).toEqual('Legendary Pattern: Mountains - 3C');
   });
   test('should work with links', () => {
-    expect(getShopItemString(testCostumeShopItem, { gamepediaLink: true } as any)).toEqual('Rare Costume Bottom: [Hatchling](https://fallguysultimateknockout.gamepedia.com/Hatchling_Costume) - 4500K');
-    expect(getShopItemString(patternShopItem, { gamepediaLink: true } as any)).toEqual('Legendary Pattern: [Mountains](https://fallguysultimateknockout.gamepedia.com/Patterns) - 3C');
-    expect(getShopItemString(tartanPatternShopItem, { gamepediaLink: true } as any)).toEqual('Epic Pattern: [Tartan](https://fallguysultimateknockout.gamepedia.com/Tartan_Pattern) - 4500K');
-    expect(getShopItemString(faceShopItem, { gamepediaLink: true } as any)).toEqual('Epic Face: [Raging](https://fallguysultimateknockout.gamepedia.com/Faceplates) - 1C');
-    expect(getShopItemString(colourShopItem, { gamepediaLink: true } as any)).toEqual('Legendary Colour: [Bumblebee](https://fallguysultimateknockout.gamepedia.com/Colour_Schemes) - 2C');
+    expect(getShopItemString(testCostumeShopItem, { gamepediaLink: true } as any)).toEqual('Rare Costume Bottom: <a href="https://fallguysultimateknockout.gamepedia.com/Hatchling_Costume">Hatchling</a> - 4500K');
+    expect(getShopItemString(patternShopItem, { gamepediaLink: true } as any)).toEqual('Legendary Pattern: <a href="https://fallguysultimateknockout.gamepedia.com/Patterns">Mountains</a> - 3C');
+    expect(getShopItemString(tartanPatternShopItem, { gamepediaLink: true } as any)).toEqual('Epic Pattern: <a href="https://fallguysultimateknockout.gamepedia.com/Tartan_Pattern">Tartan</a> - 4500K');
+    expect(getShopItemString(faceShopItem, { gamepediaLink: true } as any)).toEqual('Epic Face: <a href="https://fallguysultimateknockout.gamepedia.com/Faceplates">Raging</a> - 1C');
+    expect(getShopItemString(colourShopItem, { gamepediaLink: true } as any)).toEqual('Legendary Colour: <a href="https://fallguysultimateknockout.gamepedia.com/Colour_Schemes">Bumblebee</a> - 2C');
   });
   // test('should work with emojis', () => {
   //   expect(getShopItemString(testCostumeShopItem, { emoji: true } as any)).toEqual('Rare Costume Bottom🟪🩳: Hatchling - 4500🇰');

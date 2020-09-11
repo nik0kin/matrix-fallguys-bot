@@ -43,7 +43,7 @@ export function getShopItemString(item: ShopItem, settings: Settings) {
   const type = isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type);
 
   const itemLink = getFallguysGamepediaItemUrl(item);
-  const name = settings.gamepediaLink ? `[${item.name}](${itemLink})` : item.name;
+  const name = settings.gamepediaLink ? `<a href="${itemLink}">${item.name}</a>` : item.name;
 
   const cost = `${item.cost}${currencyEmoji || (item.currency === 'kudos' ? 'K' : 'C')}`;
 
