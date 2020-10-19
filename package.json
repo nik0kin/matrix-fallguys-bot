@@ -9,6 +9,7 @@
     "convert": "ts-jest config:migrate ./jest.config.js",
     "// ------ TESTING ----- //": "",
     "test": "jest --watch",
+    "test:db": "ts-node src/test-db",
     "coverage": "jest --collectCoverageFrom=src/**/*.ts --coverage",
     "// ------ BUILDING ----- //": "",
     "build": "tsc",
