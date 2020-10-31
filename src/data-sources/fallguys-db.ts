@@ -5,7 +5,7 @@ import { DBItem, FallGuysFauxDatabaseResponse } from '../db-types';
 import { ShopItem } from '../fall-guys';
 
 const baseUrl = 'https://fallguysdb.com';
-export const fallguysDbTodaysShopUrl = `${baseUrl}/todays-item-shop`;
+const fallguysDbTodaysShopUrl = `${baseUrl}/todays-item-shop`;
 
 function getFallguysDBItemUrl(itemLink: string) {
   return baseUrl + itemLink;

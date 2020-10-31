@@ -5,4 +5,5 @@ export interface Settings {
   emoji: boolean;
   itemLink: boolean;
   onBotJoinRoomMessage: string;
+  // dataSource?: 'skin-db' | 'fallguys-db'
 }

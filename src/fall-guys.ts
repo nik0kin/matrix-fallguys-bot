@@ -1,6 +1,6 @@
 export interface Item {
   name: string;
-  type: 'colour' | 'pattern' | 'face' | 'upper' | 'lower';
+  type: 'colour' | 'pattern' | 'face' | 'upper' | 'lower' | 'emote' | 'celebration' | 'banner' | 'nickname';
   rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
 }
 

@@ -7,7 +7,7 @@ const testCostumeShopItem: DBItem = {
   'rarity': 'rare',
   'cost': 4500,
   'currency': 'kudos',
-  'link': '/lower-items/hatchling'
+  'link': 'https://fallguysdb.com/lower-items/hatchling'
 };
 
 const patternShopItem: DBItem = {
@@ -16,7 +16,7 @@ const patternShopItem: DBItem = {
   'rarity': 'legendary',
   'cost': 3,
   'currency': 'crowns',
-  'link': '/patterns/mountains'
+  'link': 'https://fallguysdb.com/patterns/mountains'
 };
 
 const tartanPatternShopItem: DBItem = {
@@ -25,7 +25,7 @@ const tartanPatternShopItem: DBItem = {
   'rarity': 'epic',
   'cost': 4500,
   'currency': 'kudos',
-  'link': '/patterns/tartan'
+  'link': 'https://fallguysdb.com/patterns/tartan'
 };
 
 const faceShopItem: DBItem = {
@@ -34,7 +34,7 @@ const faceShopItem: DBItem = {
   'rarity': 'epic',
   'cost': 1,
   'currency': 'crowns',
-  'link': '/faces/raging'
+  'link': 'https://fallguysdb.com/faces/raging'
 };
 
 const colourShopItem: DBItem = {
@@ -43,7 +43,7 @@ const colourShopItem: DBItem = {
   'rarity': 'legendary',
   'cost': 2,
   'currency': 'crowns',
-  'link': '/colors/bumblebee'
+  'link': 'https://fallguysdb.com/colors/bumblebee'
 };
 
 describe('getShopItemString', () => {

@@ -10,7 +10,7 @@ describe('parseFallguysDbTodaysShopPage', () => {
       'rarity': 'rare',
       'cost': 4500,
       'currency': 'kudos',
-      'link': '/upper-items/hatchling'
+      'link': 'https://fallguysdb.com/upper-items/hatchling'
     });
     expect(data.shopFeaturedItems[1]).toEqual({
       'name': 'Hatchling',
@@ -18,7 +18,7 @@ describe('parseFallguysDbTodaysShopPage', () => {
       'rarity': 'rare',
       'cost': 4500,
       'currency': 'kudos',
-      'link': '/lower-items/hatchling'
+      'link': 'https://fallguysdb.com/lower-items/hatchling'
     });
     expect(data.shopFeaturedItems[2]).toEqual({
       'name': 'Mountains',
@@ -26,7 +26,7 @@ describe('parseFallguysDbTodaysShopPage', () => {
       'rarity': 'legendary',
       'cost': 3,
       'currency': 'crowns',
-      'link': '/patterns/mountains'
+      'link': 'https://fallguysdb.com/patterns/mountains'
     });
   });
 });

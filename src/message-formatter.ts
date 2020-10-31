@@ -15,11 +15,15 @@ function getRarityEmoji(rarity: ShopItem['rarity']) {
 
 function getTypeEmoji(type: ShopItem['type']) {
   return {
-    'colour': '🔴',
-    'pattern': '💠',
-    'face': '🙉',
-    'upper': '👕',
-    'lower': '🩳'
+    colour: '🔴',
+    pattern: '💠',
+    face: '🙉',
+    upper: '👕',
+    lower: '🩳',
+    emote: '',
+    celebration: '',
+    banner: '',
+    nickname: '',
   }[type];
 }
 
