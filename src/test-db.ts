@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { checkDatabase } from './db';
+import { checkDatabase } from './data-sources/fallguys-db';
 
 checkDatabase()
   .then((resp) => {

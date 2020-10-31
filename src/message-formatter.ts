@@ -1,8 +1,7 @@
 import { ShopItem } from './fall-guys';
 import { Settings } from './settings';
 import { capitalizeFirstLetter } from './string-util';
-import { getFallguysDBItemUrl } from './fall-guys-db';
-import { DBItem } from './db-item';
+import { DBItem } from './db-types';
 
 function getRarityEmoji(rarity: ShopItem['rarity']) {
   return {
@@ -43,9 +42,8 @@ export function getShopItemString(item: DBItem, settings: Settings, htmlFormatte
   const topOrBottom = isCostume ? ' ' + item.type === 'upper' ? 'Top' : 'Bottom' : '';
   const type = isCostume ? 'Costume ' + topOrBottom : capitalizeFirstLetter(item.type);
 
-  const itemLink = getFallguysDBItemUrl(item.link);
-  const name = settings.gamepediaLink
-    ? !htmlFormatted ? `[${item.name}](${itemLink})` : `<a href="${itemLink}">${item.name}</a>`
+  const name = settings.itemLink
+    ? !htmlFormatted ? `[${item.name}](${item.link})` : `<a href="${item.link}">${item.name}</a>`
     : item.name;
 
   const cost = `${item.cost}${currencyEmoji || (item.currency === 'kudos' ? 'K' : 'C')}`;

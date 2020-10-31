@@ -1,4 +1,4 @@
-import { parseFallguysDbTodaysShopPage } from './db';
+import { parseFallguysDbTodaysShopPage } from './fallguys-db';
 
 describe('parseFallguysDbTodaysShopPage', () => {
   test('should return 3 shop items', async () => {

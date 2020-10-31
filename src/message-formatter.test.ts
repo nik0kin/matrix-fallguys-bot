@@ -1,4 +1,4 @@
-import { DBItem } from './db-item';
+import { DBItem } from './db-types';
 import { getShopItemString } from './message-formatter';
 
 const testCostumeShopItem: DBItem = {
@@ -52,15 +52,15 @@ describe('getShopItemString', () => {
     expect(getShopItemString(patternShopItem, {} as any, false)).toEqual('Legendary Pattern: Mountains - 3C');
   });
   test('should work with links', () => {
-    expect(getShopItemString(testCostumeShopItem, { gamepediaLink: true } as any, false))
+    expect(getShopItemString(testCostumeShopItem, { itemLink: true } as any, false))
       .toEqual('Rare Costume Bottom: [Hatchling](https://fallguysdb.com/lower-items/hatchling) - 4500K');
-    expect(getShopItemString(patternShopItem, { gamepediaLink: true } as any, false))
+    expect(getShopItemString(patternShopItem, { itemLink: true } as any, false))
       .toEqual('Legendary Pattern: [Mountains](https://fallguysdb.com/patterns/mountains) - 3C');
-    expect(getShopItemString(tartanPatternShopItem, { gamepediaLink: true } as any, false))
+    expect(getShopItemString(tartanPatternShopItem, { itemLink: true } as any, false))
       .toEqual('Epic Pattern: [Tartan](https://fallguysdb.com/patterns/tartan) - 4500K');
-    expect(getShopItemString(faceShopItem, { gamepediaLink: true } as any, false))
+    expect(getShopItemString(faceShopItem, { itemLink: true } as any, false))
       .toEqual('Epic Face: [Raging](https://fallguysdb.com/faces/raging) - 1C');
-    expect(getShopItemString(colourShopItem, { gamepediaLink: true } as any, false))
+    expect(getShopItemString(colourShopItem, { itemLink: true } as any, false))
       .toEqual('Legendary Colour: [Bumblebee](https://fallguysdb.com/colors/bumblebee) - 2C');
   });
   // test('should work with emojis', () => {

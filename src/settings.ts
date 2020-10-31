@@ -3,6 +3,6 @@ export interface Settings {
   accessToken: string;
   pollFrequency: number; // In seconds
   emoji: boolean;
-  gamepediaLink: boolean;
+  itemLink: boolean;
   onBotJoinRoomMessage: string;
 }
