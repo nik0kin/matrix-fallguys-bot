@@ -4,7 +4,7 @@ import { MatrixClient } from 'matrix-bot-sdk';
 import { checkDatabase } from './db';
 import { ShopItem } from './fall-guys';
 import { getShopItemString } from './message-formatter';
-import { Settings } from './settings';
+import { Settings, SettingsWithDefaults } from './settings';
 import { createMatrixClient } from './matrix-bot';
 
 let lastFeaturedShopItems: [ShopItem, ShopItem, ShopItem];
@@ -32,25 +32,38 @@ async function checkForNewFeaturedStoreItems(settings: Settings, botClient: Matr
     const shopItemMessage = shopFeaturedItemsTitle + '\n' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings, false)}`).join('\n');
     const shopItemMessageHtmlFormatted = shopFeaturedItemsTitle + '<br>' + data.shopFeaturedItems.map((i) => ` - ${getShopItemString(i, settings, true)}`).join('<br>');
     console.log(shopItemMessage);
-    sendMessageToAllJoinedRooms(botClient, shopItemMessage, shopItemMessageHtmlFormatted);
+
+    if (!settings.dryRun) {
+      sendMessageToAllJoinedRooms(botClient, shopItemMessage, shopItemMessageHtmlFormatted);
+    }
 
     lastFeaturedShopItems = data.shopFeaturedItems;
   }
 }
 
 
-export function startPoll(settings: Settings) {
+export function startPoll(userSettings: Settings) {
+  const settings: SettingsWithDefaults = {
+    storageFile: 'bot-storage.json',
+    dryRun: false,
+    autoJoin: false,
+    emoji: false,
+    itemLink: false,
+    dataSource: 'skin-db',
+    ...userSettings,
+  };
+
   const botClient = createMatrixClient(settings);
 
   botClient.start()
     .then(() => {
       console.log(settings.onBotJoinRoomMessage || 'onBotJoinRoomMessage');
 
-      if (settings.onBotJoinRoomMessage) {
+      if (settings.onBotJoinRoomMessage && !settings.dryRun) {
         sendMessageToAllJoinedRooms(botClient, settings.onBotJoinRoomMessage);
 
         botClient.on('room.join', (roomId: string) => {
-          botClient.sendText(roomId, settings.onBotJoinRoomMessage);
+          botClient.sendText(roomId, settings.onBotJoinRoomMessage!);
         });
       }
       poll(settings, botClient);
@@ -62,7 +75,7 @@ function sendMessageToAllJoinedRooms(client: MatrixClient, message: string, html
     .then((rooms) => {
       rooms.forEach((roomId) => {
         client.sendMessage(roomId, {
-          msgtype: 'm.text',
+          msgtype: 'm.notice',
           body: message,
           ...(htmlFormattedMessage ? {
             format: 'org.matrix.custom.html',
