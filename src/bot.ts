@@ -42,7 +42,7 @@ async function checkForNewFeaturedStoreItems(settings: Settings, botClient: Matr
 }
 
 
-export function startPoll(userSettings: Settings) {
+export async function startPoll(userSettings: Settings) {
   const settings: SettingsWithDefaults = {
     storageFile: 'bot-storage.json',
     dryRun: false,
@@ -55,19 +55,17 @@ export function startPoll(userSettings: Settings) {
 
   const botClient = createMatrixClient(settings);
 
-  botClient.start()
-    .then(() => {
-      console.log(settings.onBotJoinRoomMessage || 'onBotJoinRoomMessage');
+  await botClient.start();
+  console.log(settings.onBotJoinRoomMessage || 'onBotJoinRoomMessage');
 
-      if (settings.onBotJoinRoomMessage && !settings.dryRun) {
-        sendMessageToAllJoinedRooms(botClient, settings.onBotJoinRoomMessage);
+  if (settings.onBotJoinRoomMessage && !settings.dryRun) {
+    sendMessageToAllJoinedRooms(botClient, settings.onBotJoinRoomMessage);
 
-        botClient.on('room.join', (roomId: string) => {
-          botClient.sendText(roomId, settings.onBotJoinRoomMessage!);
-        });
-      }
-      poll(settings, botClient);
+    botClient.on('room.join', (roomId: string) => {
+      botClient.sendText(roomId, settings.onBotJoinRoomMessage!);
     });
+  }
+  poll(settings, botClient);
 }
 
 function sendMessageToAllJoinedRooms(client: MatrixClient, message: string, htmlFormattedMessage?: string) {
